@@ -1,0 +1,104 @@
+Question 1: 
+What is a RESTful API and what are its advantages?
+Answer: 
+RESTful API can be defined as an API (application programming interface) that conforms to the design principles of the REST, or representational state transfer architectural style. 
+The advantages  of RESTful API are:
+**It provides a flexible , lightweight way to integrate applications and have been most common method for connecting components in an applications.  
+**Also it can handle multiple types of calls , return different data formats. 
+**It also offers the opportunity to use multiple environments while developing.
+
+
+Question 2: 
+What is the difference between git merge and git rebase?
+Answer:
+Git merge --> It is command that allows to merge branches from Git.
+                   -->  Git  merge adds new commit preserving history
+Git rebase --> It is command that allows developers to integrate changes from one branch to another.
+                    --> Git rebase moves a feature branch into a master branch.
+
+Question 3:
+How do you find a list of files that have been changed in a particular commit?
+Answer:
+git log --raw
+
+Question 4:
+What is the process to revert a commit that has already has been pushed and made public?
+Answer:
+git reset --hard <last_working_commit_id>
+git push -f
+
+Question 5:
+What are some of the different types of indexes in SQL?
+Answer:
+There are basically two different types of indexes in SQL which are:
+1) Clustered Index --  It defines as the order in which data is physically stored in a table.
+2) Non-Clustered Index --- is stored at one place and table data  is stored in another place. So, it doesn't sort the physical data inside the table.
+
+
+Question 6:
+What is the difference between the DELETE and TRUNCATE commands in SQL?
+Answer:
+DELETE:
+              ----> It removes some or all of the records from the table.
+               ---> It retains the identity and does not reset it to the base value.
+             ----> Rollback is possible with Delete.
+
+TRUNCATE:
+            ---->  It deletes entire rows from a table by deallocating the pages that are used to store the table data.
+            ----> Truncate command  reset the identity to its base value.
+           -----> Rollback is not possible with Truncate
+            
+Question 7:
+What is a constraint in SQL?
+Answer:
+SQL constraints are used to specify rules for the data in a table.
+Constraints are used to limit the type of data that can go into a table.
+It ensures the accuracy and reliability of data in the table.
+Commonly used constraints are : NOT NULL, UNIQUE, PRIMARY KEY, FOREIGN KEY, DEFAULT
+
+
+Question 8:
+You get an alert with this cryptic error message, no traceback:
+TypeError: 'NoneType' object is not iterable.
+
+
+What do you think is wrong with the below code? Describe your analysis / debugging process and offer your opinion on how you would fix this, if possible.
+
+from datetime import datetime
+
+def main():
+  now_epoch = datetime.now().timestamp()
+  config = get_config(now_epoch)
+  print('am I happy?', config['happy'])
+
+def get_config(epoch_time):
+  """
+  Get a configuration that changes arbitrarily
+  based on the time the program was loaded.
+  """
+  config_map = {
+    0: {'happy': True, 'concerned': True},
+    1: {'happy': False, 'concerned': True},
+    2: {'happy': True, 'concerned': False},
+    3: {'happy': True, 'concerned': True, 'impatient': False},
+    4: {'happy': False, 'concerned': False},
+  }
+  config_identifier = epoch_time % len(config_map)
+  return dict(config_map.get(config_identifier))
+Write your answer here...
+
+
+
+Question 9:
+Design a relational database that stores "users" (first names, last names, and unique usernames) and relates them to one or more email addresses.
+You can write this out in terms of SQL DDL statements, Django model classes, paragraph form, or a mix of these.
+Write your answer here...
+
+
+Question 10:
+Create a simple API spec for getting a list of global endangered species. These species have common names, scientific names, an estimate of how many are left in the wild, and descriptions of what they are and why they are endangered.
+
+
+
+This spec is *not* code - write it like you would write API documentation. You can imagine this as a dream endpoint - write it how you would like it to work.
+

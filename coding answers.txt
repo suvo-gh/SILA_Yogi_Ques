@@ -1,0 +1,93 @@
+boto3.resource('s3').Bucket('mybucket')
+
+"""Accessing the S3 buckets using boto3 client"""
+s3_client =boto3.client('s3')
+s3_bucket_name='filename_prod'
+s3 = boto3.resource('s3',
+                    aws_access_key_id= 'YOUR_ACCESS_KEY_ID',
+                    aws_secret_access_key='YOUR_SECRET_ACCESS_KEY')
+
+""" Getting data files from the AWS S3 bucket as denoted above and printing the first 10 file names having prefix "2019/7/8" """
+my_bucket=s3.Bucket(s3_bucket_name)
+bucket_list = []
+for file in my_bucket.objects.filter(Prefix = '2019/7/8'):
+    file_name=file.key
+    if file_name.find(".csv")!=-1:
+        bucket_list.append(file.key)
+length_bucket_list=print(len(bucket_list))
+print(bucket_list[0:10])
+
+
+
+import os
+import boto3
+
+#initiate s3 resource
+s3 = boto3.resource('s3')
+
+# select bucket
+my_bucket = s3.Bucket('my_bucket_name')
+
+# download file into current directory
+for s3_object in my_bucket.objects.all():
+    # Need to split s3_object.key into path and file name, else it will give error file not found.
+    path, filename = os.path.split(s3_object.key)
+    my_bucket.download_file(s3_object.key, filename)
+
+
+****************************************************************
+import requests
+import json
+
+r = requests.get('https://coderbyte.com/api/challenges/json/json-cleaning')
+data = r.json()
+
+def clean_data(data):
+  
+  if(isinstance(data, dict)):
+    to_be_deleted=[]
+    for k in data:
+      if(isinstance(data[k],dict)):
+       
+       new_val = clean_data(data[k])
+       data[k]=new_val
+      if(isinstance(data[k],list)):
+
+        new_val = clean_data(data[k])
+        data[k]=new_val
+      elif(isinstance(data[k],str)):
+        if(data[k]=='N/A'):
+          to_be_deleted.append(k)
+        if(data[k]=='-'):
+          to_be_deleted.append(k)
+        if(data[k]==''):
+          to_be_deleted.append(k)
+    for i in to_be_deleted:
+      del data[i]
+    return data
+
+  if(isinstance(data,list)):
+    to_be_deleted=[]
+    for i in range(len (data)):
+      if(isinstance(data[i],dict)):
+        new_val = clean_data(data[i])
+        data[i]=new_val
+      if(isinstance(data[i],list)):
+        new_val = clean_data(data[k])
+        data[i]=new_val
+      if(isinstance(data[i],str)):
+        if(data[i]=='N/A'):
+          to_be_deleted.append(i)
+        if(data[i]=="-"):
+          to_be_deleted.append(i)
+        if(data[i]==''):
+          to_be_deleted.append(i)  
+    for i in to_be_deleted:
+      del data[i]
+    return data
+
+
+print(clean_data(data))
+
+
+
