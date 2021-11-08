@@ -87,12 +87,22 @@ def get_config(epoch_time):
   return dict(config_map.get(config_identifier))
 Write your answer here...
 
+Answer: The code is incomplete after declaring function get_config(epoch_time) as epoch_time != None. That's why we get TypeError:'NoneType' object is not iterable.
+We can avoid the TypeError: 'NoneType' object is not utterable by using conditional statement.
+
 
 
 Question 9:
 Design a relational database that stores "users" (first names, last names, and unique usernames) and relates them to one or more email addresses.
 You can write this out in terms of SQL DDL statements, Django model classes, paragraph form, or a mix of these.
 Write your answer here...
+
+Answer: class User(models.Model):
+	  first_name = models.CharField(max_length=64)
+	  last_name = models.CharField(max_length=64)
+	  username = models.CharField(max_length=64, unique = True, blank = True) 
+	class Email(models.Model):
+	  email = models.ForeignKey('Users', on_Delete = models.CASCADE)
 
 
 Question 10:
@@ -102,3 +112,44 @@ Create a simple API spec for getting a list of global endangered species. These 
 
 This spec is *not* code - write it like you would write API documentation. You can imagine this as a dream endpoint - write it how you would like it to work.
 
+Answer: 
+
+Title: List of global endangered species.
+
+Introduction: This is a simple API Documentation of globally endangered species and this API will be containing all the endangered species common name, scientific names, estimate their numbers left and description of what they are and why they are endangered
+
+Tutorial:  
+1) Project Setup
+2) Serializers
+3) Views
+4) URLs
+5) Pagination
+6) Settings 
+7) Testing on API
+
+Example: 
+{
+   "global_endangered_species" : [{
+				"id": 1,
+				"common_name": "Rino",
+				"scientific_name": "Diceros bicornis",
+				"species_left": "750",
+				"descriptions": "They have horns. So most of them are killed for horn by poachers"
+
+},
+				{
+				"id": 1,
+				"common_name": "Rino A",
+				"scientific_name": "Diceros bicornis",
+				"species_left": "500",
+				"descriptions": "They have horns. So most of them are killed for horn by poachers"
+
+},				{
+				"id": 1,
+				"common_name": "Rino B",
+				"scientific_name": "Diceros bicornis",
+				"species_left": "350",
+				"descriptions": "They have horns. So most of them are killed for horn by poachers"
+
+}]	
+}
